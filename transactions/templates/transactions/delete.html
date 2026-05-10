@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Удалить транзакцию</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; }
+        header { background: #1f2d3d; color: white; padding: 18px; text-align: center; }
+        .container { max-width: 400px; margin: 60px auto; }
+        .card { background: white; padding: 25px; border-radius: 12px; text-align: center; }
+        button { padding: 12px 20px; background: #c0392b; color: white; border: none; border-radius: 8px; margin-right: 10px; cursor: pointer; }
+        a { padding: 12px 20px; background: #7f8c8d; color: white; text-decoration: none; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <header>💰 Финансовые переводы - Lab8</header>
+    <div class="container">
+        <div class="card">
+            <h2>Удалить транзакцию?</h2>
+            <p>{{ transaction.description }} - {{ transaction.amount }} ₽</p>
+            <form method="post">{% csrf_token %}<button type="submit">Удалить</button><a href="/">Отмена</a></form>
+        </div>
+    </div>
+</body>
+</html>

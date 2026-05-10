@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать транзакцию</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; }
+        header { background: #1f2d3d; color: white; padding: 18px; text-align: center; font-size: 22px; }
+        .container { max-width: 500px; margin: 40px auto; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
+        textarea { resize: none; height: 80px; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 8px; background: #27ae60; color: white; font-size: 16px; cursor: pointer; }
+        .back { display: block; text-align: center; margin-top: 15px; color: #3498db; text-decoration: none; }
+        .errorlist { color: #c0392b; list-style: none; padding: 0; margin: -10px 0 15px 0; }
+    </style>
+</head>
+<body>
+<header>Финансовые переводы - Lab8</header>
+<div class="container">
+<div class="card">
+<h2>Редактировать</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Сумма</label> {{ form.amount }} {{ form.amount.errors }}
+    <label>Тип</label> {{ form.transaction_type }}
+    <label>Категория</label> {{ form.category }}
+    <label>{{ form.category_name.label }}</label> {{ form.category_name }}
+    <small style="color:#666;">Или создайте новую</small>
+    <label>{{ form.tags_names.label }}</label> {{ form.tags_names }}
+    <small>Теги через запятую</small>
+    <label>Существующие теги</label> {{ form.tags }}
+    <label>Описание</label> {{ form.description }}
+    <button type="submit">Сохранить изменения</button>
+</form>
+<a href="/" class="back">← Назад</a>
+</div>
+</div>
+</body>
+</html>

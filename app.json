@@ -1,0 +1,30 @@
+{
+  "name": "Financial Transactions Lab8",
+  "description": "Лабораторная работа №8 - Финансовые переводы на Django",
+  "image": "heroku/python",
+  "repository": "https://github.com/ismailov/финансовые-переводы",
+  "keywords": ["python", "django", "financial"],
+  "env": {
+    "SECRET_KEY": {
+      "description": "Секретный ключ Django",
+      "generator": "secret"
+    },
+    "DEBUG": {
+      "description": "Режим отладки",
+      "value": "False"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "python manage.py migrate && echo \"from django.contrib.auth.models import Group; Group.objects.get_or_create(name='admin'); Group.objects.get_or_create(name='user')\" | python manage.py shell"
+  }
+}

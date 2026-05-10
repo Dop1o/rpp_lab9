@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Подтверждение удаления</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f9; margin: 0; padding-bottom: 50px; }
+        header { background: #1f2d3d; color: white; padding: 18px; text-align: center; font-size: 22px; }
+        .container { max-width: 500px; margin: 80px auto; }
+        .card { background: white; padding: 30px; border-radius: 12px; text-align: center; }
+        h2 { margin-top: 0; color: #c0392b; }
+        button { padding: 12px 20px; background: #c0392b; color: white; border: none; border-radius: 8px; cursor: pointer; margin-right: 10px; font-size: 16px; }
+        .cancel { padding: 12px 20px; background: #7f8c8d; color: white; text-decoration: none; border-radius: 8px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <header>💰 Подтверждение</header>
+    <div class="container">
+        <div class="card">
+            <h2>Удалить "{{ object.name }}"?</h2>
+            <p>Это действие нельзя отменить.</p>
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Да, удалить</button>
+            </form>
+            <a href="javascript:history.back()" class="cancel">Отмена</a>
+        </div>
+    </div>
+</body>
+</html>

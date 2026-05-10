@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f9; margin: 0; }
+        header { background: #1f2d3d; color: white; padding: 18px; text-align: center; }
+        .container { max-width: 400px; margin: 60px auto; }
+        .card { background: white; padding: 30px; border-radius: 12px; }
+        h2 { text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; }
+        button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <header>Финансовые переводы - Lab8</header>
+    <div class="container">
+        <div class="card">
+            <h2>Вход в систему</h2>
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="error">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="post">
+                {% csrf_token %}
+                <label>Логин:</label>
+                <input type="text" name="username" required>
+                
+                <label>Пароль:</label>
+                <input type="password" name="password" required>
+                
+                <button type="submit">Войти</button>
+            </form>
+            <p style="text-align:center; margin-top:20px;">
+                <a href="/register/">Нет аккаунта? Зарегистрироваться</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

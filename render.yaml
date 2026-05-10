@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: financial-transactions
+    env: docker
+    region: frankfurt
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: DEBUG
+        value: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lab8-db
+          property: connectionString
+
+databases:
+  - name: lab8-db
+    plan: free

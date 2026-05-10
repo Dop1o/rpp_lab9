@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Дашборд</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f9; margin: 0; }
+        header { background: #1f2d3d; color: white; padding: 18px; text-align: center; }
+        .container { max-width: 1200px; margin: 40px auto; }
+        .card { background: rgb(255, 255, 255); padding: 25px; border-radius: 12px; margin-bottom: 20px; }
+        h2 { margin-top: 0; }
+        .btn-back { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #7f8c8d; color: white; text-decoration: none; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #34495e; color: white; }
+    </style>
+</head>
+<body>
+    <header>Финансовый дашборд - Lab8</header>
+    <div class="container">
+        <div class="card">
+            <h2>Расходы за текущий месяц</h2>
+            <p style="font-size: 32px; color: #c0392b; font-weight: bold; margin: 10px 0;">{{ monthly_expenses }} ₽</p>
+            
+            <h3>По категориям:</h3>
+            <ul>
+                {% for cat in expenses_by_category %}
+                    <li><strong>{{ cat.category__name|default:"Без категории" }}</strong>: {{ cat.total }} ₽</li>
+                {% empty %}
+                    <li>Нет расходов за этот месяц</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>Популярные теги</h2>
+            <ul>
+                {% for tag in top_tags %}
+                    <li><strong>{{ tag.name }}</strong> (использован {{ tag.usage_count }} раз)</li>
+                {% empty %}
+                    <li>Нет тегов</li>
+                {% endfor %}
+            </ul>
+        </div>    
+        {% if is_admin %}
+        <div class="card">
+            <h2>Статистика по пользователям</h2>
+            <table>
+                <thead>
+                    <tr><th>Пользователь</th><th>Кол-во транзакций</th><th>Сумма расходов</th><th>Сумма доходов</th><th>Баланс</th></tr>
+                </thead>
+                <tbody>
+                    {% for user_stat in user_stats %}
+                    <tr>
+                        <td>{{ user_stat.username }}</td>
+                        <td>{{ user_stat.transaction_count }}</td>
+                        <td style="color:#c0392b;">{{ user_stat.total_expenses }} ₽</td>
+                        <td style="color:#27ae60;">{{ user_stat.total_income }} ₽</td>
+                        <td>
+                            {{ user_stat.balance }} ₽
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        
+        <a href="/" class="btn-back">На главную</a>
+    </div>
+</body>
+</html>

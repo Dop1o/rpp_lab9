@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создать категорию</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f9; margin: 0; padding-bottom: 50px; }
+        header { background: #1f2d3d; color: white; padding: 18px; text-align: center; font-size: 22px; }
+        .container { max-width: 500px; margin: 60px auto; }
+        .card { background: white; padding: 30px; border-radius: 12px;}
+        h2 { margin-top: 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        .btn-back { display: inline-block; margin-top: 15px; color: #3498db; text-decoration: none; }
+        .error { background: #f8d7da; color: #721c24; padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+        .success { background: #d4edda; color: #155724; padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <header>💰 Создать категорию</header>
+    <div class="container">
+        <div class="card">
+            <h2>Новая категория</h2>
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="post">
+                {% csrf_token %}
+                <label>Название категории:</label>
+                <input type="text" name="name" required autofocus placeholder="Например: Еда, Транспорт, Развлечения">
+                <button type="submit">Создать категорию</button>
+            </form>
+            <a href="/categories/" class="btn-back">Назад к списку категорий</a>
+        </div>
+    </div>
+</body>
+</html>
