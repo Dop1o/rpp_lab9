@@ -80,8 +80,17 @@ class ModelTests(TestCase):
 
     def test_transaction_ordering(self):
         """Тест сортировки транзакций по дате"""
+        from django.utils import timezone
+        from datetime import timedelta
+        
         t1 = Transaction.objects.create(amount=100, description='T1', user=self.user)
-        t2 = Transaction.objects.create(amount=200, description='T2', user=self.user)
+        # Небольшая пауза, чтобы даты точно отличались
+        t2 = Transaction.objects.create(
+            amount=200, 
+            description='T2', 
+            user=self.user,
+            created_at=timezone.now() + timedelta(seconds=1)
+        )
         transactions = Transaction.objects.all()
         self.assertEqual(transactions.first(), t2)
         self.assertEqual(transactions.last(), t1)
