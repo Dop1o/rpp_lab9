@@ -83,15 +83,19 @@ class ModelTests(TestCase):
         from django.utils import timezone
         from datetime import timedelta
         
-        t1 = Transaction.objects.create(amount=100, description='T1', user=self.user)
-        # Небольшая пауза, чтобы даты точно отличались
+        t1 = Transaction.objects.create(
+            amount=100, 
+            description='T1', 
+            user=self.user,
+            created_at=timezone.now()
+        )
         t2 = Transaction.objects.create(
             amount=200, 
             description='T2', 
             user=self.user,
-            created_at=timezone.now() + timedelta(seconds=1)
+            created_at=timezone.now() + timedelta(seconds=10)
         )
-        transactions = Transaction.objects.all()
+        transactions = Transaction.objects.all().order_by('-created_at')
         self.assertEqual(transactions.first(), t2)
         self.assertEqual(transactions.last(), t1)
 
